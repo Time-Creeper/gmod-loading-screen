@@ -24,8 +24,37 @@
   <!-- Use an animated GIF as the loading screen background -->
   <img src="loading.gif" alt="Loading...">
   <!-- Background music support -->
-  <audio src="music.mp3" autoplay loop>
-    Your browser does not support the audio element.
+  <audio id="audioPlayer" controls></audio>
+    <script>
+      // Explicitly list all your music files here
+      const musicFiles = [
+        "music1.mp3",
+        "music2.mp3",
+        "music3.mp3"
+        // Add more as needed
+      ];
+    
+      let currentTrack = 0;
+      const audioPlayer = document.getElementById('audioPlayer');
+    
+      function playTrack(index) {
+        audioPlayer.src = musicFiles[index];
+        audioPlayer.play();
+      }
+    
+      audioPlayer.addEventListener('ended', () => {
+        currentTrack++;
+        if (currentTrack < musicFiles.length) {
+          playTrack(currentTrack);
+        } else {
+          currentTrack = 0; // Loop back (optional)
+          // playTrack(currentTrack);
+        }
+      });
+    
+      // Start playing the first track
+      playTrack(currentTrack);
+    </script>
   </audio>
 </body>
 </html>
